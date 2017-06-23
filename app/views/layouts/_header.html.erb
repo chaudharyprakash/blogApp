@@ -1,0 +1,9 @@
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+  
+  <b class=" col-md-offset-8 form-link ">
+    <% if current_user.present? %>
+      <%=link_to "LogOut", logout_path(session: session[:user_id]), :method => :delete%>
+    <% end %>
+    <%=link_to "Post Blog", '', id: "submitPost" %>
+  </b>
+</nav>

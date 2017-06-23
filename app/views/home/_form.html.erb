@@ -1,0 +1,49 @@
+<div class="container blog-form testimonials">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2 inner-form">
+      <%= form_for(@blogs, url: (@blogs.new_record? ? blogs_path : blog_path(@blogs)), action: @blogs.new_record? ? "POST" : "PUT") do |f| %>  
+        <div class="form-group left">
+          <div class="cols-md-10">
+            <h3>Submit a post</h3>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="cols-md-10">
+            <%= f.text_field :title, :class => 'form-control', placeholder: "Title" %>
+            <span class="error-msg">
+              <%= @blogs.errors.full_messages_for(:title).first if @blogs.errors.present? %>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="cols-sm-10">
+          <%= f.cktext_area :description%>
+          <span class="error-msg">
+            <%= @blogs.errors.full_messages_for(:description).first if @blogs.errors.present? %>
+          </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+        <% if current_user.present? %>
+          <%= f.submit "submit" , class: 'btn btn-lg btn-default btn-home' %>
+        <% else %>
+          <%= link_to "Authenticate with GitHub", "/auth/github", class: "btn btn-lg btn-default btn-home"%>
+        <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $( document ).ready(function() {
+    console.log("<%= @post_form %>");
+    if("<%= @post_form %>"){
+      $(".blog-form").css('display', 'block');
+    }else{
+      $(".blog-form").css('display', 'none');
+    }
+  });
+</script>
