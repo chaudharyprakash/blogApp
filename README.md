@@ -1,2 +1,2 @@
-# OAuth Example
-This is an example Rails app to teach about OAuth and Omniauth.
+# BlogApp
+https://blog-post1.herokuapp.com
