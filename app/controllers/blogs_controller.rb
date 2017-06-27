@@ -1,13 +1,13 @@
 class BlogsController < ApplicationController
 
-  before_filter :set_blogs, only: [:edit, :update, :destroy]
+  before_filter :set_blog, only: [:edit, :update, :destroy]
 
   def new
     @blogs = Blog.new
   end
 
   def create
-    @blogs = current_user.blogs.create(blog_params)
+    @blogs = current_user.blogs.new(blog_params)
     if @blogs.save
       flash[:sucess] = "Blog Successfully Created"
       redirect_to root_path
@@ -18,10 +18,11 @@ class BlogsController < ApplicationController
   end
 
   def update
-    if @blogs.update_attributes(blog_params)
+    if @blog.update_attributes(blog_params)
       flash.keep[:notice] = "Blog Successfully Updated.."
       redirect_to root_path
     else
+      @post_form = true
       render 'edit'
     end
   end
@@ -31,13 +32,13 @@ class BlogsController < ApplicationController
   end
 
   def destroy
-    @blogs.destroy
+    @blog.destroy
     flash.keep[:notice] = "Blog Successfully Deleted.."
     redirect_to root_path
   end
 
-  def set_blogs
-    @blogs = Blog.find_by_id(params[:id])
+  def set_blog
+    @blog = Blog.find_by_id(params[:id])
   end
 
   private

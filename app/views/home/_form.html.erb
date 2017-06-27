@@ -26,7 +26,7 @@
         </div>
 
         <div class="form-group">
-        <% if current_user.present? || params[:action] == "edit" %>
+        <% if current_user || (params[:action] == "edit" || params[:action] == "update" )%>
           <%= f.submit "submit" , class: 'btn btn-lg btn-default btn-home' %>
         <% else %>
           <%= link_to "Authenticate with GitHub", "/auth/github", class: "btn btn-lg btn-default btn-home"%>
@@ -39,7 +39,6 @@
 
 <script type="text/javascript">
   $( document ).ready(function() {
-    console.log("<%= @post_form %>");
     if("<%= @post_form %>"){
       $(".blog-form").css('display', 'block');
     }else{
