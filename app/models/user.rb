@@ -1,11 +1,10 @@
 class User < ActiveRecord::Base
   has_many :blogs
   
-  validates :email, presence: true
+  # validates :email, presence: true
   
   def self.find_or_create_by_auth(auth)
     user = User.find_or_initialize_by(provider: auth['provider'], uid: auth['uid'])
-
     user.nickname = auth['info']['nickname']
     user.name = auth['info']['name']
     user.email = auth['info']['email']
